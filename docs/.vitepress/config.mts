@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   base: '/docs-vp/',
   ignoreDeadLinks: true,
-  title: "My Awesome Project",
+  title: "VitePress",
   description: "A VitePress Site",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -15,11 +15,11 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'HTML Single',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Networking', link: '/networking' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+
+          { text: 'Networking', link: '/networking' }
+
         ]
       }
     ],
