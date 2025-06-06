@@ -24908,16 +24908,17 @@ The following table explains additional configurations for `ClusterUserDefinedNe
 
 
 1.  Optional configurations for user-defined networks
-| --- | --- | --- | --- |
-| CUDN field | UDN field | Type | Description | 
-| spec.network.\<topology>.joinSubnets | spec.\<topology>.joinSubnets | object | When omitted, the platform sets default values for the joinSubnets field of 100.65.0.0/16 for IPv4 and fd99::/64 for IPv6. If the default address values are used anywhere in the cluster’s network you must override it by setting the joinSubnets field. If you choose to set this field, ensure it does not conflict with other subnets in the cluster such as the cluster subnet, the default network cluster subnet, and the masquerade subnet.The joinSubnets field configures the routing between different segments within a user-defined network. Dual-stack clusters can set 2 subnets, one for each IP family; otherwise, only 1 subnet is allowed. This field is only allowed for the Primary network. | 
-| spec.network.\<topology>.excludeSubnets | spec.\<topology>.exlcudeSubnets | string | Specifies a list of CIDRs to be removed from the specified CIDRs in the subnets field. The CIDRs in this list must be in range of at least one subnet specified in subnets. When omitted, no IP addresses are excluded, and all IP addresses specified in the subnets field are subject to assignment. You must use standard CIDR notation. For example, 10.128.0.0/16. This field must be omitted if the subnets field is not set or if the ipam.mode field is set to Disabled.When deploying a secondary network with Localnet topology, the IP ranges used in your physical network must be explicitly listed in the excludeSubnets field to prevent IP duplication in your subnet. | 
-| spec.network.\<topology>.ipam.lifecycle | spec.\<topology>.ipam.lifecycle | object | The spec.ipam.lifecycle field configures the IP address management system (IPAM). You might use this field for virtual workloads to ensure persistent IP addresses. The only allowed value is Persistent, which ensures that your virtual workloads have persistent IP addresses across reboots and migration. These are assigned by the container network interface (CNI) and used by OVN-Kubernetes to program pod IP addresses. You must not change this for pod annotations.Setting a value of Persistent is only supported when ipam.mode parameter is set to Enabled. | 
-| spec.network.\<topology>.ipam.mode | spec.\<topology>`ipam.mode | object | The mode parameter controls how much of the IP configuration is managed by OVN-Kubernetes. The following options are available:Enabled: When enabled, OVN-Kubernetes applies the IP configuration to the SDN infrastructure and assigns IP addresses from the selected subnet to the individual pods. This is the default setting. When set to Enabled, the subnets field must be defined. Enabled is the default configuration.Disabled: When disabled, OVN-Kubernetes only assigns MAC addresses and provides layer 2 communication, which allows users to configure IP addresses. Disabled is only available for layer 2 (secondary) networks. By disabling IPAM, features that rely on selecting pods by IP, for example, network policy, services, and so on, no longer function. Additionally, IP port security is also disabled for interfaces attached to this network. The subnets field must be empty when spec.ipam.mode is set to Disabled. | 
-| spec.network.\<topology>.mtu | spec.\<topology>.mtu | integer | The maximum transmission units (MTU). The default value is 1400. The boundary for IPv4 is 576, and for IPv6 it is 1280. | 
-| spec.network.localnet.vlan | N/A | object | This field is optional and configures the virtual local area network (VLAN) tagging and allows you to segment the physical network into multiple independent broadcast domains. | 
-| spec.network.localnet.vlan.mode | N/A | object | Acceptable values are Access. A value of Access specifies that the network interface belongs to a single VLAN and all traffic will be labelled with an id that is configured in the spec.network.localnet.vlan.mode.access.id field. The id specifies the VLAN id (VID) for access ports. Values must be an integer between 1 and 4094. | 
-| spec.network.localnet.physicalNetworkName | N/A | string | Specifies the name for a physical network interface. The value you specify must match the network-name parameter that you provided in your Open vSwitch (OVS) bridge mapping. | 
+
+    | --- | --- | --- | --- |
+    | CUDN field | UDN field | Type | Description | 
+    | spec.network.\<topology>.joinSubnets | spec.\<topology>.joinSubnets | object | When omitted, the platform sets default values for the joinSubnets field of 100.65.0.0/16 for IPv4 and fd99::/64 for IPv6. If the default address values are used anywhere in the cluster’s network you must override it by setting the joinSubnets field. If you choose to set this field, ensure it does not conflict with other subnets in the cluster such as the cluster subnet, the default network cluster subnet, and the masquerade subnet.The joinSubnets field configures the routing between different segments within a user-defined network. Dual-stack clusters can set 2 subnets, one for each IP family; otherwise, only 1 subnet is allowed. This field is only allowed for the Primary network. | 
+    | spec.network.\<topology>.excludeSubnets | spec.\<topology>.exlcudeSubnets | string | Specifies a list of CIDRs to be removed from the specified CIDRs in the subnets field. The CIDRs in this list must be in range of at least one subnet specified in subnets. When omitted, no IP addresses are excluded, and all IP addresses specified in the subnets field are subject to assignment. You must use standard CIDR notation. For example, 10.128.0.0/16. This field must be omitted if the subnets field is not set or if the ipam.mode field is set to Disabled.When deploying a secondary network with Localnet topology, the IP ranges used in your physical network must be explicitly listed in the excludeSubnets field to prevent IP duplication in your subnet. | 
+    | spec.network.\<topology>.ipam.lifecycle | spec.\<topology>.ipam.lifecycle | object | The spec.ipam.lifecycle field configures the IP address management system (IPAM). You might use this field for virtual workloads to ensure persistent IP addresses. The only allowed value is Persistent, which ensures that your virtual workloads have persistent IP addresses across reboots and migration. These are assigned by the container network interface (CNI) and used by OVN-Kubernetes to program pod IP addresses. You must not change this for pod annotations.Setting a value of Persistent is only supported when ipam.mode parameter is set to Enabled. | 
+    | spec.network.\<topology>.ipam.mode | spec.\<topology>`ipam.mode | object | The mode parameter controls how much of the IP configuration is managed by OVN-Kubernetes. The following options are available:Enabled: When enabled, OVN-Kubernetes applies the IP configuration to the SDN infrastructure and assigns IP addresses from the selected subnet to the individual pods. This is the default setting. When set to Enabled, the subnets field must be defined. Enabled is the default configuration.Disabled: When disabled, OVN-Kubernetes only assigns MAC addresses and provides layer 2 communication, which allows users to configure IP addresses. Disabled is only available for layer 2 (secondary) networks. By disabling IPAM, features that rely on selecting pods by IP, for example, network policy, services, and so on, no longer function. Additionally, IP port security is also disabled for interfaces attached to this network. The subnets field must be empty when spec.ipam.mode is set to Disabled. | 
+    | spec.network.\<topology>.mtu | spec.\<topology>.mtu | integer | The maximum transmission units (MTU). The default value is 1400. The boundary for IPv4 is 576, and for IPv6 it is 1280. | 
+    | spec.network.localnet.vlan | N/A | object | This field is optional and configures the virtual local area network (VLAN) tagging and allows you to segment the physical network into multiple independent broadcast domains. | 
+    | spec.network.localnet.vlan.mode | N/A | object | Acceptable values are Access. A value of Access specifies that the network interface belongs to a single VLAN and all traffic will be labelled with an id that is configured in the spec.network.localnet.vlan.mode.access.id field. The id specifies the VLAN id (VID) for access ports. Values must be an integer between 1 and 4094. | 
+    | spec.network.localnet.physicalNetworkName | N/A | string | Specifies the name for a physical network interface. The value you specify must match the network-name parameter that you provided in your Open vSwitch (OVS) bridge mapping. | 
 
 
 where:
@@ -24930,6 +24931,7 @@ where:
 
 
 The following tables explain the status condition types returned for `ClusterUserDefinedNetwork` and `UserDefinedNetwork` CRs when describing the resource. These conditions can be used to troubleshoot your deployment.
+
 | Condition type | Status | Reason and Message | 
 | --- | --- | --- | --- |
 | NetworkCreated | True | When True, the following reason and message is returned: | 
@@ -37088,18 +37090,18 @@ Follow this procedure to increase the log level of the OVN-Kubernetes to help yo
 
         
 
-        ```bash { title="Example output"}
-        [pod/ovnkube-node-2cpjc/sbdb] + exec /usr/share/ovn/scripts/ovn-ctl --no-monitor '--ovn-sb-log=-vconsole:info -vfile:off -vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' run_sb_ovsdb
-        [pod/ovnkube-node-2cpjc/ovnkube-controller] I1012 14:39:59.984506   35767 config.go:2247] Logging config: {File: CNIFile:/var/log/ovn-kubernetes/ovn-k8s-cni-overlay.log LibovsdbFile:/var/log/ovnkube/libovsdb.log Level:5 LogFileMaxSize:100 LogFileMaxBackups:5 LogFileMaxAge:0 ACLLoggingRateLimit:20}
-        [pod/ovnkube-node-2cpjc/northd] + exec ovn-northd --no-chdir -vconsole:info -vfile:off '-vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' --pidfile /var/run/ovn/ovn-northd.pid --n-threads=1
-        [pod/ovnkube-node-2cpjc/nbdb] + exec /usr/share/ovn/scripts/ovn-ctl --no-monitor '--ovn-nb-log=-vconsole:info -vfile:off -vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' run_nb_ovsdb
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.552Z|00002|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 6 nodes (32 nodes total across 32 buckets)
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00003|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 6 nodes (64 nodes total across 64 buckets)
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00004|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 7 nodes (32 nodes total across 32 buckets)
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00005|reconnect|DBG|unix:/var/run/openvswitch/db.sock: entering BACKOFF
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00007|reconnect|DBG|unix:/var/run/openvswitch/db.sock: entering CONNECTING
-        [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00008|ovsdb_cs|DBG|unix:/var/run/openvswitch/db.sock: SERVER_SCHEMA_REQUESTED -> SERVER_SCHEMA_REQUESTED at lib/ovsdb-cs.c:423
-        ```
+    ```bash { title="Example output"}
+    [pod/ovnkube-node-2cpjc/sbdb] + exec /usr/share/ovn/scripts/ovn-ctl --no-monitor '--ovn-sb-log=-vconsole:info -vfile:off -vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' run_sb_ovsdb
+    [pod/ovnkube-node-2cpjc/ovnkube-controller] I1012 14:39:59.984506   35767 config.go:2247] Logging config: {File: CNIFile:/var/log/ovn-kubernetes/ovn-k8s-cni-overlay.log LibovsdbFile:/var/log/ovnkube/libovsdb.log Level:5 LogFileMaxSize:100 LogFileMaxBackups:5 LogFileMaxAge:0 ACLLoggingRateLimit:20}
+    [pod/ovnkube-node-2cpjc/northd] + exec ovn-northd --no-chdir -vconsole:info -vfile:off '-vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' --pidfile /var/run/ovn/ovn-northd.pid --n-threads=1
+    [pod/ovnkube-node-2cpjc/nbdb] + exec /usr/share/ovn/scripts/ovn-ctl --no-monitor '--ovn-nb-log=-vconsole:info -vfile:off -vPATTERN:console:%D{%Y-%m-%dT%H:%M:%S.###Z}|%05N|%c%T|%p|%m' run_nb_ovsdb
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.552Z|00002|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 6 nodes (32 nodes total across 32 buckets)
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00003|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 6 nodes (64 nodes total across 64 buckets)
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00004|hmap|DBG|lib/shash.c:114: 1 bucket with 6+ nodes, including 1 bucket with 7 nodes (32 nodes total across 32 buckets)
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00005|reconnect|DBG|unix:/var/run/openvswitch/db.sock: entering BACKOFF
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00007|reconnect|DBG|unix:/var/run/openvswitch/db.sock: entering CONNECTING
+    [pod/ovnkube-node-2cpjc/ovn-controller] 2023-10-12T14:39:54.553Z|00008|ovsdb_cs|DBG|unix:/var/run/openvswitch/db.sock: SERVER_SCHEMA_REQUESTED -> SERVER_SCHEMA_REQUESTED at lib/ovsdb-cs.c:423
+    ```
 
         
 
@@ -38495,28 +38497,32 @@ Dynamic assignment
 :    You specify an IP address indirectly, with namespace and pod selectors, and an optional network attachment definition.
 
 
-    *   If the name of a network attachment definition is provided, the external gateway IP address of the network attachment is used.
+*   If the name of a network attachment definition is provided, the external gateway IP address of the network attachment is used.
 
-    *   If the name of a network attachment definition is not provided, the external gateway IP address for the pod itself is used. However, this approach works only if the pod is configured with `hostNetwork` set to `true`.
+*   If the name of a network attachment definition is not provided, the external gateway IP address for the pod itself is used. However, this approach works only if the pod is configured with `hostNetwork` set to `true`.
 
 
 #### AdminPolicyBasedExternalRoute object configuration { #nw-secondary-ext-gw-object_configuring-secondary-external-gateway} 
 
 
 You can define an `AdminPolicyBasedExternalRoute` object, which is cluster scoped, with the following properties. A namespace can be selected by only one `AdminPolicyBasedExternalRoute` CR at a time.
+
 | Field | Type | Description | 
 | --- | --- | --- |
 | metadata.name | string | Specifies the name of the AdminPolicyBasedExternalRoute object. | 
 | spec.from | string | Specifies a namespace selector that the routing policies apply to. Only namespaceSelector is supported for external traffic. For example: from: namespaceSelector: matchLabels: kubernetes.io/metadata.name: novxlan-externalgw-ecmp-4059 A namespace can only be targeted by one AdminPolicyBasedExternalRoute CR. If a namespace is selected by more than one AdminPolicyBasedExternalRoute CR, a failed error status occurs on the second and subsequent CRs that target the same namespace. To apply updates, you must change the policy itself or related objects to the policy such as target namespaces, pod gateways, or namespaces hosting them from dynamic hops in order for the policy to be re-evaluated and your changes to be applied. | 
 | spec.nextHops | object | Specifies the destinations where the packets are forwarded to. Must be either or both of static and dynamic. You must have at least one next hop defined. | 
+
 | Field | Type | Description | 
 | --- | --- | --- |
 | static | array | Specifies an array of static IP addresses. | 
 | dynamic | array | Specifies an array of pod selectors corresponding to pods configured with a network attachment definition to use as the external gateway target. | 
+
 | Field | Type | Description | 
 | --- | --- | --- |
 | ip | string | Specifies either an IPv4 or IPv6 address of the next destination hop. | 
 | bfdEnabled | boolean | Optional: Specifies whether Bi-Directional Forwarding Detection (BFD) is supported by the network. The default value is false. | 
+
 | Field | Type | Description | 
 | --- | --- | --- |
 | podSelector | string | Specifies a [set-based](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#set-based-requirement) label selector to filter the pods in the namespace that match this network configuration. | 
@@ -38962,21 +38968,21 @@ The following resources from the diagram are illustrated in detail:
 
     
 
-    ```yaml { title="Namespace objects"}
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: namespace1
-      labels:
-        env: prod
-    ---
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: namespace2
-      labels:
-        env: prod
-    ```
+```yaml { title="Namespace objects"}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace1
+  labels:
+    env: prod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace2
+  labels:
+    env: prod
+```
 
     
 
@@ -38985,25 +38991,25 @@ The following resources from the diagram are illustrated in detail:
 
     
 
-    ```yaml { title="EgressIP object"}
-    apiVersion: k8s.ovn.org/v1
-    kind: EgressIP
-    metadata:
-      name: egressips-prod
-    spec:
-      egressIPs:
-      - 192.168.126.10
-      - 192.168.126.102
-      namespaceSelector:
-        matchLabels:
-          env: prod
-    status:
-      items:
-      - node: node1
-        egressIP: 192.168.126.10
-      - node: node3
-        egressIP: 192.168.126.102
-    ```
+```yaml { title="EgressIP object"}
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: egressips-prod
+spec:
+  egressIPs:
+  - 192.168.126.10
+  - 192.168.126.102
+  namespaceSelector:
+    matchLabels:
+      env: prod
+status:
+  items:
+  - node: node1
+    egressIP: 192.168.126.10
+  - node: node3
+    egressIP: 192.168.126.102
+```
 
     
     For the configuration in the previous example, OpenShift Container Platform assigns both egress IP addresses to the available nodes. The `status` field reflects whether and where the egress IP addresses are assigned.
