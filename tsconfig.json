@@ -1,0 +1,14 @@
+// tsconfig.json (example, yours might be different)
+{
+  "compilerOptions": {
+    // ...
+    "types": ["vite/client"], // Or ensure vite-env.d.ts is included
+    // ...
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.d.ts",
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.vue"
+  ]
+}

@@ -1,8 +1,29 @@
 import { defineConfig } from 'vitepress'
 
+
+const GITHUB_PAGES_REPO_NAME = 'docs-vp'; // Replace
+
+let calculatedBase = '/'; // Default base
+
+// Access Vite-exposed env variables
+const netlifyContext = process.env.VITE_NETLIFY_CONTEXT || '';
+const githubActions = process.env.VITE_GITHUB_ACTIONS === 'true' || false;
+const githubRepo = process.env.VITE_GITHUB_REPOSITORY || '';
+
+if (netlifyContext === 'production') {
+    calculatedBase = '/';
+} else if (githubActions) {
+    const repoName = githubRepo.split('/')[1];
+    calculatedBase = `/${repoName}/`;
+} else {
+    calculatedBase = `/`;
+}
+
+
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/docs-vp/',
+  base: calculatedBase,
   ignoreDeadLinks: true,
   title: "VitePress",
   description: "A VitePress Site",

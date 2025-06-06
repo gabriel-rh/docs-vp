@@ -27,6 +27,10 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_NETLIFY_CONTEXT: ${{ github.event_name == 'push' && 'production' || 'development' }}
+      VITE_GITHUB_ACTIONS: true
+      VITE_GITHUB_REPOSITORY: ${{ github.repository }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
