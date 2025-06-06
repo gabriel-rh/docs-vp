@@ -10,12 +10,14 @@ const netlifyContext = process.env.VITE_NETLIFY_CONTEXT || '';
 const githubActions = process.env.VITE_GITHUB_ACTIONS === 'true' || false;
 const githubRepo = process.env.VITE_GITHUB_REPOSITORY || '';
 
-if (netlifyContext === 'production') {
-    calculatedBase = '/';
-} else if (githubActions) {
+if (githubActions) {
     const repoName = githubRepo.split('/')[1];
     calculatedBase = `/${repoName}/`;
-} else {
+}
+else if (netlifyContext === 'production') {
+    calculatedBase = '/';
+} 
+else {
     calculatedBase = `/`;
 }
 
