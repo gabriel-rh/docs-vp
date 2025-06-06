@@ -24027,6 +24027,7 @@ As of OpenShift Container Platform 4.19, the `Localnet` topology is generally av
 
 
 The following section highlights the supported features of the `UserDefinedNetwork` and `NetworkAttachmentDefinition` CRs when they are used as either the primary or secondary network. A separate table for the `ClusterUserDefinedNetwork` CR is also included.
+
 | Network feature | Layer2 topology | Layer3 topology | 
 | --- | --- | --- |
 | east-west traffic | ✓ | ✓ | 
@@ -24043,31 +24044,33 @@ The following section highlights the supported features of the `UserDefinedNetwo
 1.  Multicast must be enabled in the namespace, and it is only available between OVN-Kubernetes network pods. For more information about multicast, see "Enabling multicast for a project".
 
 1.  When creating a `UserDefinedNetwork` CR with a primary network type, network policies must be created *after* the `UserDefinedNetwork` CR.
-| Network feature | Layer2 topology | Layer3 topology | Localnet topology [1] | 
-| --- | --- | --- | --- |
-| east-west traffic | ✓ | ✓ | ✓ (NetworkAttachmentDefinition CR only) | 
-| north-south traffic | X | X | ✓ (NetworkAttachmentDefinition CR only) | 
-| Persistent IPs | ✓ | X | ✓ (NetworkAttachmentDefinition CR only) | 
-| Services | X | X | X | 
-| Routes | X | X | X | 
-| EgressIP resource | X | X | X | 
-| Multicast | X | X | X | 
-| NetworkPolicy resource | X | X | X | 
-| MultinetworkPolicy resource | ✓ | ✓ | ✓ (NetworkAttachmentDefinition CR only) | 
+
+    | Network feature | Layer2 topology | Layer3 topology | Localnet topology [1] | 
+    | --- | --- | --- | --- |
+    | east-west traffic | ✓ | ✓ | ✓ (NetworkAttachmentDefinition CR only) | 
+    | north-south traffic | X | X | ✓ (NetworkAttachmentDefinition CR only) | 
+    | Persistent IPs | ✓ | X | ✓ (NetworkAttachmentDefinition CR only) | 
+    | Services | X | X | X | 
+    | Routes | X | X | X | 
+    | EgressIP resource | X | X | X | 
+    | Multicast | X | X | X | 
+    | NetworkPolicy resource | X | X | X | 
+    | MultinetworkPolicy resource | ✓ | ✓ | ✓ (NetworkAttachmentDefinition CR only) | 
 
 
 1.  The Localnet topology is unavailable for use with the `UserDefinedNetwork` CR. It is only supported on secondary networks for `NetworkAttachmentDefinition` CRs.
-| Network feature | Layer2 topology | Layer3 topology | Localnet topology | 
-| --- | --- | --- | --- |
-| east-west traffic | ✓ | ✓ | ✓ | 
-| north-south traffic | ✓ | ✓ | ✓ | 
-| Persistent IPs | ✓ | X | ✓ | 
-| Services | ✓ | ✓ |  | 
-| Routes | X | X |  | 
-| EgressIP resource | ✓ | ✓ |  | 
-| Multicast [1] | X | ✓ |  | 
-| MultinetworkPolicy resource | X | X | ✓ | 
-| NetworkPolicy resource [2] | ✓ | ✓ |  | 
+
+    | Network feature | Layer2 topology | Layer3 topology | Localnet topology | 
+    | --- | --- | --- | --- |
+    | east-west traffic | ✓ | ✓ | ✓ | 
+    | north-south traffic | ✓ | ✓ | ✓ | 
+    | Persistent IPs | ✓ | X | ✓ | 
+    | Services | ✓ | ✓ |  | 
+    | Routes | X | X |  | 
+    | EgressIP resource | ✓ | ✓ |  | 
+    | Multicast [1] | X | ✓ |  | 
+    | MultinetworkPolicy resource | X | X | ✓ | 
+    | NetworkPolicy resource [2] | ✓ | ✓ |  | 
 
 
 1.  Multicast must be enabled in the namespace, and it is only available between OVN-Kubernetes network pods. For more information, see "About multicast".
