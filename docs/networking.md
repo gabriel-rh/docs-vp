@@ -4430,9 +4430,9 @@ You can configure deployment specifications in the MetalLB custom resource to ma
 
     
 
-    ```bash { title="Example output"}
-    "event":"ipAllocated","ip":"172.22.0.201","msg":"IP address assigned by controller
-    ```
+```bash { title="Example output"}
+"event":"ipAllocated","ip":"172.22.0.201","msg":"IP address assigned by controller
+```
 
     
 
@@ -11847,7 +11847,7 @@ Status:
     Reason:                SetupFailed
     Status:                False
     Type:                  Ready-In-Zone-example-ctlplane-0.example.example-org.net
-    ```
+
 ```
 
 
@@ -22474,26 +22474,26 @@ Troubleshoot common problems with the PTP Operator by performing the following s
 
         
 
-        ```yaml { title="Example output"}
-        apiVersion: ptp.openshift.io/v1
-        kind: NodePtpDevice
-        metadata:
-          creationTimestamp: "2021-09-14T16:52:33Z"
-          generation: 1
-          name: compute-0.example.com
-          namespace: openshift-ptp
-          resourceVersion: "177400"
-          uid: 30413db0-4d8d-46da-9bef-737bacd548fd
-        spec: {}
-        status:
-          devices:
-          - name: eno1
-          - name: eno2
-          - name: eno3
-          - name: eno4
-          - name: enp5s0f0
-          - name: enp5s0f1
-        ```
+    ```yaml { title="Example output"}
+    apiVersion: ptp.openshift.io/v1
+    kind: NodePtpDevice
+    metadata:
+      creationTimestamp: "2021-09-14T16:52:33Z"
+      generation: 1
+      name: compute-0.example.com
+      namespace: openshift-ptp
+      resourceVersion: "177400"
+      uid: 30413db0-4d8d-46da-9bef-737bacd548fd
+    spec: {}
+    status:
+      devices:
+      - name: eno1
+      - name: eno2
+      - name: eno3
+      - name: eno4
+      - name: enp5s0f0
+      - name: enp5s0f1
+    ```
 
         
 
@@ -38015,9 +38015,9 @@ If you already upgraded your cluster to OpenShift Container Platform 4.16 or lat
 
             
 
-            ```text { title="Example output"}
-            infrastructure/cluster patched
-            ```
+        ```text { title="Example output"}
+        infrastructure/cluster patched
+        ```
 
             
 
@@ -39634,10 +39634,10 @@ Red Hat OpenStack Platform (RHOSP)
 :    If you deploy OpenShift Container Platform on RHOSP, you must allow traffic from the IP and MAC addresses of the egress router pod on your OpenStack environment. If you do not allow the traffic, then [communication will fail](https://access.redhat.com/solutions/2803331):
 
 
-    ```bash
-    $ openstack port set --allowed-address \
-      ip_address=<ip_address>,mac_address=<mac_address> <neutron_port_uuid>
-    ```
+```bash
+$ openstack port set --allowed-address \
+  ip_address=<ip_address>,mac_address=<mac_address> <neutron_port_uuid>
+```
 
 
 VMware vSphere
